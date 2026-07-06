@@ -1,0 +1,1520 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Más de 1.000 Sesiones de Entrenamiento de Fútbol</title>
+<style>
+  /* ===========================================================
+     TOKENS
+  =========================================================== */
+  :root{
+    --black:#101010;
+    --black-soft:#181818;
+    --black-card:#1c1c1c;
+    --white:#ffffff;
+    --gray:#b8b8b8;
+    --gray-dim:#8a8a8a;
+    --lime:#C6FF00;
+    --lime-dim:#9fd400;
+    --border:#2b2b2b;
+    --radius:18px;
+    --shadow-soft: 0 20px 50px rgba(0,0,0,.45);
+    --font-display: 'Archivo Black', 'Arial Black', sans-serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+  body{
+    background:var(--black);
+    color:var(--white);
+    font-family:var(--font-body);
+    line-height:1.6;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{ max-width:100%; display:block; }
+  a{ color:inherit; text-decoration:none; }
+  ul{ list-style:none; }
+
+  .container{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  section{ position:relative; padding:100px 0; }
+
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    color:var(--lime);
+    font-weight:700;
+    font-size:13px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    margin-bottom:18px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:8px; height:8px;
+    background:var(--lime);
+    border-radius:50%;
+    box-shadow:0 0 12px var(--lime);
+  }
+
+  h1,h2,h3{
+    font-family:var(--font-display);
+    line-height:1.1;
+    letter-spacing:-0.01em;
+  }
+
+  .section-title{
+    font-size:clamp(28px, 4vw, 44px);
+    text-align:center;
+    margin-bottom:16px;
+  }
+  .section-sub{
+    text-align:center;
+    color:var(--gray);
+    max-width:640px;
+    margin:0 auto 56px;
+    font-size:17px;
+  }
+
+  .accent{ color:var(--lime); }
+
+  /* ===========================================================
+     BUTTONS
+  =========================================================== */
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    padding:20px 44px;
+    font-family:var(--font-display);
+    font-size:17px;
+    letter-spacing:.02em;
+    border-radius:100px;
+    border:none;
+    cursor:pointer;
+    transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
+    white-space:nowrap;
+  }
+  .btn-primary{
+    background:var(--lime);
+    color:var(--black);
+    box-shadow:0 10px 30px rgba(198,255,0,.25);
+  }
+  .btn-primary:hover{
+    transform:translateY(-3px);
+    box-shadow:0 16px 40px rgba(198,255,0,.4);
+    background:var(--lime-dim);
+  }
+  .btn-primary:active{ transform:translateY(0); }
+  .btn-outline{
+    background:transparent;
+    border:2px solid var(--lime);
+    color:var(--lime);
+  }
+  .btn-outline:hover{
+    background:var(--lime);
+    color:var(--black);
+  }
+  .btn-block{ width:100%; }
+  .btn-sm{ padding:14px 28px; font-size:14px; }
+
+  /* ===========================================================
+     HERO
+  =========================================================== */
+  .hero{
+    padding:70px 0 110px;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(198,255,0,.08), transparent 40%),
+      radial-gradient(circle at 85% 80%, rgba(198,255,0,.06), transparent 45%),
+      var(--black);
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+    background-size:48px 48px;
+    pointer-events:none;
+    mask-image:radial-gradient(circle at 50% 30%, black, transparent 70%);
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:60px;
+    align-items:center;
+    position:relative;
+    z-index:1;
+  }
+  .hero-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:rgba(198,255,0,.1);
+    border:1px solid rgba(198,255,0,.35);
+    color:var(--lime);
+    padding:8px 16px;
+    border-radius:100px;
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:.04em;
+    margin-bottom:24px;
+  }
+  .hero h1{
+    font-size:clamp(34px, 5.2vw, 58px);
+    margin-bottom:22px;
+  }
+  .hero h1 span{ color:var(--lime); }
+  .hero p.lead{
+    font-size:19px;
+    color:var(--gray);
+    max-width:520px;
+    margin-bottom:34px;
+  }
+  .hero-cta-row{ display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
+  .hero-microcopy{
+    font-size:13px;
+    color:var(--gray-dim);
+    margin-top:14px;
+  }
+  .hero-stats{
+    display:flex;
+    gap:34px;
+    margin-top:46px;
+    flex-wrap:wrap;
+  }
+  .hero-stat b{
+    display:block;
+    font-family:var(--font-display);
+    font-size:26px;
+    color:var(--white);
+  }
+  .hero-stat span{
+    font-size:13px;
+    color:var(--gray-dim);
+  }
+
+  .hero-image-wrap{
+    border-radius:24px;
+    overflow:hidden;
+    border:1px solid var(--border);
+    box-shadow:var(--shadow-soft);
+  }
+  .hero-image-wrap img{
+    width:100%;
+    display:block;
+  }
+  .hero-visual{
+    position:relative;
+  }
+  .hero-visual-card{
+    background:linear-gradient(155deg, var(--black-card), #101010);
+    border:1px solid var(--border);
+    border-radius:24px;
+    padding:18px;
+    box-shadow:var(--shadow-soft);
+    transform:rotate(2deg);
+  }
+  .hero-visual-card img{
+    border-radius:16px;
+    width:100%;
+    aspect-ratio:4/5;
+    object-fit:cover;
+  }
+  .hero-float-tag{
+    position:absolute;
+    background:var(--white);
+    color:var(--black);
+    padding:14px 20px;
+    border-radius:14px;
+    font-weight:800;
+    font-size:14px;
+    box-shadow:0 14px 30px rgba(0,0,0,.4);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .hero-float-tag.tag1{ top:-18px; right:-10px; transform:rotate(-4deg); }
+  .hero-float-tag.tag2{ bottom:20px; left:-30px; background:var(--lime); transform:rotate(3deg); }
+  .hero-float-tag .dot{ width:10px; height:10px; border-radius:50%; background:var(--lime); }
+  .hero-float-tag.tag2 .dot{ background:var(--black); }
+
+  @keyframes float{
+    0%,100%{ transform:translateY(0) rotate(var(--r,0deg)); }
+    50%{ transform:translateY(-10px) rotate(var(--r,0deg)); }
+  }
+  .tag1{ animation:float 5s ease-in-out infinite; --r:-4deg; }
+  .tag2{ animation:float 6s ease-in-out infinite .5s; --r:3deg; }
+
+  /* ===========================================================
+     WHAT YOU GET GRID
+  =========================================================== */
+  .grid-cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+    gap:22px;
+  }
+  .feature-card{
+    background:var(--black-card);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:30px 26px;
+    transition:transform .3s ease, border-color .3s ease, background .3s ease;
+  }
+  .feature-card:hover{
+    transform:translateY(-6px);
+    border-color:rgba(198,255,0,.5);
+    background:#202020;
+  }
+  .feature-icon{
+    width:52px; height:52px;
+    border-radius:14px;
+    background:rgba(198,255,0,.12);
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom:20px;
+    color:var(--lime);
+  }
+  .feature-card h3{
+    font-family:var(--font-body);
+    font-weight:800;
+    font-size:18px;
+    margin-bottom:10px;
+  }
+  .feature-card p{
+    color:var(--gray);
+    font-size:14.5px;
+  }
+
+  /* ===========================================================
+     BENEFITS SECTION (dark alt)
+  =========================================================== */
+  .section-alt{
+    background:var(--black-soft);
+    border-top:1px solid var(--border);
+    border-bottom:1px solid var(--border);
+  }
+  .benefits-list{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px 40px;
+    max-width:920px;
+    margin:0 auto;
+  }
+  .benefit-item{
+    display:flex;
+    align-items:flex-start;
+    gap:16px;
+    padding:18px 0;
+    border-bottom:1px solid var(--border);
+  }
+  .benefit-check{
+    flex-shrink:0;
+    width:30px; height:30px;
+    border-radius:50%;
+    background:var(--lime);
+    color:var(--black);
+    display:flex; align-items:center; justify-content:center;
+    font-weight:900;
+    font-size:15px;
+  }
+  .benefit-item h4{ font-size:16px; margin-bottom:4px; }
+  .benefit-item p{ color:var(--gray-dim); font-size:14px; }
+
+  /* ===========================================================
+     OFFER
+  =========================================================== */
+  .offer-wrap{
+    background:linear-gradient(160deg, #16190a, var(--black-card) 60%);
+    border:1px solid rgba(198,255,0,.3);
+    border-radius:28px;
+    padding:56px;
+    max-width:920px;
+    margin:0 auto;
+    box-shadow:var(--shadow-soft);
+    position:relative;
+    overflow:hidden;
+  }
+  .offer-wrap::before{
+    content:"OFERTA ESPECIAL";
+    position:absolute;
+    top:26px; right:-58px;
+    background:var(--lime);
+    color:var(--black);
+    font-family:var(--font-display);
+    font-size:12px;
+    padding:8px 70px;
+    transform:rotate(35deg);
+    letter-spacing:.08em;
+  }
+  .offer-top{ text-align:center; margin-bottom:36px; }
+  .offer-top .eyebrow{ justify-content:center; width:100%; }
+  .price-row{
+    display:flex;
+    align-items:baseline;
+    justify-content:center;
+    gap:18px;
+    margin:18px 0 6px;
+    flex-wrap:wrap;
+  }
+  .price-old{
+    font-size:24px;
+    color:var(--gray-dim);
+    text-decoration:line-through;
+  }
+  .price-new{
+    font-family:var(--font-display);
+    font-size:56px;
+    color:var(--lime);
+  }
+  .price-note{
+    text-align:center;
+    color:var(--gray);
+    font-size:14px;
+    margin-bottom:34px;
+  }
+  .offer-list{
+    display:grid;
+    gap:14px;
+    margin-bottom:30px;
+  }
+  .offer-list li{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-size:15.5px;
+  }
+  .offer-list li b{ color:var(--lime); }
+
+  .bonus-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:16px;
+    margin:36px 0;
+  }
+  .bonus-card{
+    background:rgba(255,255,255,.03);
+    border:1px dashed rgba(198,255,0,.4);
+    border-radius:14px;
+    padding:20px;
+    text-align:center;
+  }
+  .bonus-card .bonus-tag{
+    display:inline-block;
+    background:var(--lime);
+    color:var(--black);
+    font-size:11px;
+    font-weight:800;
+    padding:4px 10px;
+    border-radius:100px;
+    margin-bottom:12px;
+    letter-spacing:.05em;
+  }
+  .bonus-card h4{ font-size:15px; margin-bottom:6px; }
+  .bonus-card .bonus-value{
+    color:var(--gray-dim);
+    font-size:13px;
+    text-decoration:line-through;
+  }
+  .offer-total{
+    text-align:center;
+    color:var(--gray);
+    font-size:14px;
+    margin-bottom:30px;
+  }
+  .offer-total b{ color:var(--white); }
+
+  /* ===========================================================
+     GATILLO DE ESCASEZ
+  =========================================================== */
+  .scarcity-bar{
+    max-width:640px;
+    margin:0 auto 50px;
+    background:var(--black-card);
+    border:1px solid rgba(255,82,82,.35);
+    border-radius:16px;
+    padding:22px 26px;
+  }
+  .scarcity-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-size:14px;
+    font-weight:700;
+    margin-bottom:12px;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .scarcity-top b{ color:#ff5252; }
+  .scarcity-track{
+    width:100%;
+    height:8px;
+    background:var(--border);
+    border-radius:100px;
+    overflow:hidden;
+  }
+  .scarcity-fill{
+    height:100%;
+    width:82%;
+    background:linear-gradient(90deg, var(--lime), #ff5252);
+    border-radius:100px;
+    animation:pulseWidth 3s ease-in-out infinite;
+  }
+  @keyframes pulseWidth{
+    0%,100%{ opacity:1; }
+    50%{ opacity:.75; }
+  }
+  .scarcity-note{
+    font-size:12.5px;
+    color:var(--gray-dim);
+    margin-top:10px;
+    text-align:center;
+  }
+
+  /* ===========================================================
+     DOS PLANES
+  =========================================================== */
+  .plans-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:26px;
+    max-width:920px;
+    margin:0 auto;
+    align-items:stretch;
+  }
+  .plan-card{
+    background:var(--black-card);
+    border:1px solid var(--border);
+    border-radius:24px;
+    padding:38px 32px;
+    display:flex;
+    flex-direction:column;
+    position:relative;
+  }
+  .plan-featured{
+    border:2px solid var(--lime);
+    background:linear-gradient(160deg, #16190a, var(--black-card) 55%);
+    box-shadow:var(--shadow-soft);
+  }
+  .plan-badge{
+    position:absolute;
+    top:-14px;
+    left:50%;
+    transform:translateX(-50%);
+    background:var(--lime);
+    color:var(--black);
+    font-family:var(--font-display);
+    font-size:12px;
+    padding:8px 20px;
+    border-radius:100px;
+    letter-spacing:.05em;
+    white-space:nowrap;
+  }
+  .plan-name{
+    font-family:var(--font-display);
+    font-size:22px;
+    display:block;
+    margin-bottom:6px;
+  }
+  .plan-desc{
+    color:var(--gray-dim);
+    font-size:14px;
+    margin-bottom:22px;
+  }
+  .plan-price-row{
+    display:flex;
+    align-items:baseline;
+    gap:14px;
+    margin-bottom:2px;
+  }
+  .plan-price{
+    font-family:var(--font-display);
+    font-size:48px;
+    color:var(--lime);
+  }
+  .plan-card .offer-list{ margin:22px 0 26px; }
+  .plan-card .price-note{ text-align:left; margin-bottom:0; }
+  .bonus-grid-compact{ margin:10px 0 22px; }
+
+  /* ===========================================================
+     UPSELL POPUP
+  =========================================================== */
+  .upsell-overlay{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.75);
+    backdrop-filter:blur(4px);
+    z-index:1000;
+    align-items:center;
+    justify-content:center;
+    padding:16px;
+  }
+  .upsell-overlay.show{ display:flex; }
+  .upsell-modal{
+    background:var(--black-card);
+    border:1px solid rgba(198,255,0,.4);
+    border-radius:20px;
+    padding:26px 28px;
+    max-width:420px;
+    width:100%;
+    max-height:92vh;
+    overflow-y:auto;
+    position:relative;
+    box-shadow:var(--shadow-soft);
+    animation:popIn .35s ease;
+  }
+  @keyframes popIn{
+    from{ transform:scale(.9); opacity:0; }
+    to{ transform:scale(1); opacity:1; }
+  }
+  .upsell-close{
+    position:absolute;
+    top:12px; right:14px;
+    background:none;
+    border:none;
+    color:var(--gray);
+    font-size:22px;
+    cursor:pointer;
+    line-height:1;
+  }
+  .upsell-close:hover{ color:var(--white); }
+  .upsell-badge{
+    display:inline-block;
+    background:rgba(198,255,0,.12);
+    color:var(--lime);
+    font-size:11px;
+    font-weight:800;
+    padding:5px 12px;
+    border-radius:100px;
+    margin-bottom:10px;
+    letter-spacing:.03em;
+  }
+  .upsell-modal h3{
+    font-family:var(--font-display);
+    font-size:19px;
+    margin-bottom:8px;
+    line-height:1.2;
+  }
+  .upsell-text{
+    color:var(--gray);
+    font-size:13px;
+    margin-bottom:14px;
+  }
+  .upsell-price-box{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:rgba(198,255,0,.08);
+    border:1px dashed rgba(198,255,0,.4);
+    border-radius:12px;
+    padding:12px 16px;
+    margin-bottom:14px;
+    flex-wrap:wrap;
+    gap:6px;
+  }
+  .upsell-old{
+    color:var(--gray-dim);
+    font-size:12px;
+    text-decoration:line-through;
+  }
+  .upsell-new{
+    font-family:var(--font-display);
+    color:var(--lime);
+    font-size:19px;
+  }
+  .upsell-modal .offer-list{
+    gap:8px;
+    margin-bottom:16px !important;
+  }
+  .upsell-modal .offer-list li{
+    font-size:13px;
+  }
+  .upsell-modal .btn-block{
+    padding:15px 30px;
+    font-size:14.5px;
+  }
+  .upsell-decline{
+    display:block;
+    width:100%;
+    background:none;
+    border:none;
+    color:var(--gray-dim);
+    font-size:12px;
+    text-align:center;
+    margin-top:10px;
+    cursor:pointer;
+    text-decoration:underline;
+  }
+  .upsell-decline:hover{ color:var(--gray); }
+
+  /* ===========================================================
+     URGENCY / COUNTDOWN
+  =========================================================== */
+  .urgency{
+    text-align:center;
+    background:radial-gradient(circle at 50% 0%, rgba(198,255,0,.08), transparent 60%), var(--black);
+  }
+  .countdown{
+    display:flex;
+    justify-content:center;
+    gap:18px;
+    margin:36px 0 40px;
+    flex-wrap:wrap;
+  }
+  .countdown .unit{
+    background:var(--black-card);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:22px 26px;
+    min-width:100px;
+  }
+  .countdown .unit span{
+    display:block;
+    font-family:var(--font-display);
+    font-size:40px;
+    color:var(--lime);
+  }
+  .countdown .unit label{
+    font-size:12px;
+    color:var(--gray-dim);
+    text-transform:uppercase;
+    letter-spacing:.08em;
+  }
+  .urgency-expired{
+    display:none;
+    font-family:var(--font-display);
+    color:#ff5252;
+    font-size:22px;
+    margin:20px 0;
+  }
+
+  /* ===========================================================
+     CAROUSEL
+  =========================================================== */
+  .carousel-wrap{ position:relative; max-width:760px; margin:0 auto; }
+  .carousel-track-outer{ overflow:hidden; border-radius:var(--radius); }
+  .carousel-track{
+    display:flex;
+    transition:transform .5s cubic-bezier(.65,0,.35,1);
+  }
+  .carousel-slide{
+    flex:0 0 100%;
+    position:relative;
+    background:#ffffff;
+  }
+  .carousel-slide img{
+    width:100%;
+    height:420px;
+    object-fit:contain;
+    background:#ffffff;
+    display:block;
+    margin:0 auto;
+  }
+  .carousel-caption{
+    position:absolute;
+    bottom:0; left:0; right:0;
+    background:linear-gradient(0deg, rgba(0,0,0,.85), transparent);
+    padding:26px 24px 18px;
+    font-family:var(--font-display);
+    font-size:18px;
+  }
+  .carousel-btn{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    background:var(--white);
+    color:var(--black);
+    border:none;
+    width:46px; height:46px;
+    border-radius:50%;
+    font-size:18px;
+    cursor:pointer;
+    z-index:2;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 8px 20px rgba(0,0,0,.4);
+    transition:background .2s ease;
+  }
+  .carousel-btn:hover{ background:var(--lime); }
+  .carousel-btn.prev{ left:-23px; }
+  .carousel-btn.next{ right:-23px; }
+  .carousel-dots{
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    margin-top:20px;
+  }
+  .carousel-dots button{
+    width:9px; height:9px;
+    border-radius:50%;
+    border:none;
+    background:var(--border);
+    cursor:pointer;
+    transition:background .2s ease, width .2s ease;
+  }
+  .carousel-dots button.active{
+    background:var(--lime);
+    width:24px;
+    border-radius:6px;
+  }
+
+  /* ===========================================================
+     TESTIMONIALS
+  =========================================================== */
+  .testi-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(280px,1fr));
+    gap:22px;
+  }
+  .testi-card{
+    background:var(--black-card);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:28px;
+  }
+  .testi-head{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin-bottom:16px;
+  }
+  .testi-avatar{
+    width:52px; height:52px;
+    border-radius:50%;
+    object-fit:cover;
+    border:2px solid var(--lime);
+  }
+  .testi-name{ font-weight:800; font-size:15px; }
+  .testi-role{ color:var(--gray-dim); font-size:12.5px; }
+  .stars{ color:var(--lime); font-size:14px; letter-spacing:2px; margin-bottom:10px; }
+  .testi-card p{ color:var(--gray); font-size:14.5px; }
+
+  /* ===========================================================
+     GUARANTEE
+  =========================================================== */
+  .guarantee{
+    display:flex;
+    align-items:center;
+    gap:48px;
+    background:var(--black-card);
+    border:1px solid var(--border);
+    border-radius:28px;
+    padding:56px;
+    max-width:920px;
+    margin:0 auto;
+  }
+  .guarantee-seal{
+    flex-shrink:0;
+    width:150px; height:150px;
+    border-radius:50%;
+    background:radial-gradient(circle, var(--lime) 0%, var(--lime-dim) 100%);
+    color:var(--black);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    font-family:var(--font-display);
+    text-align:center;
+    box-shadow:0 0 0 6px rgba(198,255,0,.15);
+  }
+  .guarantee-seal .num{ font-size:38px; line-height:1; }
+  .guarantee-seal .txt{ font-size:12px; letter-spacing:.05em; }
+  .guarantee h3{ font-size:26px; margin-bottom:14px; }
+  .guarantee p{ color:var(--gray); font-size:15.5px; }
+
+  /* ===========================================================
+     FAQ
+  =========================================================== */
+  .faq-wrap{ max-width:760px; margin:0 auto; }
+  .faq-item{
+    border-bottom:1px solid var(--border);
+  }
+  .faq-question{
+    width:100%;
+    background:none;
+    border:none;
+    color:var(--white);
+    text-align:left;
+    padding:24px 4px;
+    font-size:17px;
+    font-weight:700;
+    font-family:var(--font-body);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    cursor:pointer;
+    gap:20px;
+  }
+  .faq-question .icon{
+    flex-shrink:0;
+    width:30px; height:30px;
+    border-radius:50%;
+    border:1px solid var(--lime);
+    color:var(--lime);
+    display:flex; align-items:center; justify-content:center;
+    font-size:16px;
+    transition:transform .3s ease, background .3s ease;
+  }
+  .faq-item.open .faq-question .icon{
+    transform:rotate(45deg);
+    background:var(--lime);
+    color:var(--black);
+  }
+  .faq-answer{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .35s ease;
+  }
+  .faq-answer p{
+    color:var(--gray);
+    padding:0 4px 24px;
+    font-size:14.5px;
+    max-width:640px;
+  }
+
+  /* ===========================================================
+     STICKY CTA BAR
+  =========================================================== */
+  .sticky-cta{
+    position:fixed;
+    bottom:0; left:0; right:0;
+    background:rgba(16,16,16,.92);
+    backdrop-filter:blur(10px);
+    border-top:1px solid var(--border);
+    padding:14px 20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    z-index:999;
+    transform:translateY(120%);
+    transition:transform .4s ease;
+  }
+  .sticky-cta.show{ transform:translateY(0); }
+  .sticky-cta .info{ font-size:14px; }
+  .sticky-cta .info b{ color:var(--lime); display:block; font-size:15px; }
+
+  /* ===========================================================
+     FOOTER
+  =========================================================== */
+  footer{
+    background:var(--black);
+    border-top:1px solid var(--border);
+    padding:50px 0 90px;
+    text-align:center;
+  }
+  footer p{ color:var(--gray-dim); font-size:13.5px; }
+  footer .footer-brand{
+    font-family:var(--font-display);
+    font-size:20px;
+    margin-bottom:14px;
+    color:var(--white);
+  }
+
+  /* ===========================================================
+     RESPONSIVE
+  =========================================================== */
+  @media (max-width:900px){
+    .hero-grid{ grid-template-columns:1fr; }
+    .hero-visual{ order:-1; max-width:360px; margin:0 auto; }
+    .benefits-list{ grid-template-columns:1fr; }
+    .guarantee{ flex-direction:column; text-align:center; padding:40px 26px; }
+    .bonus-grid{ grid-template-columns:1fr; }
+    .offer-wrap{ padding:36px 24px; }
+    section{ padding:70px 0; }
+    .carousel-btn{ display:none; }
+    .carousel-slide img{ height:300px; }
+    .plans-grid{ grid-template-columns:1fr; }
+  }
+  @media (max-width:520px){
+    .price-new{ font-size:42px; }
+    .countdown .unit{ padding:16px 14px; min-width:74px; }
+    .countdown .unit span{ font-size:28px; }
+    .hero-stats{ gap:22px; }
+    .sticky-cta{ flex-direction:column; text-align:center; }
+    .plan-price{ font-size:38px; }
+    .upsell-modal{ padding:22px 20px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation:none !important; transition:none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===========================================================
+     HERO
+=========================================================== -->
+<header class="hero">
+  <div class="container">
+    <div class="hero-image-wrap">
+      <img src="hero-image.png" alt="Más de 1.000 Sesiones de Entrenamiento de Fútbol">
+    </div>
+    <div class="hero-badge" style="margin:34px auto 0;justify-content:center;display:flex;width:fit-content;">⚽ Recurso #1 para entrenadores de fútbol</div>
+    <p class="lead" style="text-align:center;margin:22px auto 0;">El banco de entrenamientos más completo para entrenadores, profesores y clubes que quieren planificar en minutos y entrenar con nivel profesional, sin repetir nunca un ejercicio.</p>
+    <div class="hero-cta-row" style="justify-content:center;margin-top:30px;">
+      <button class="btn btn-primary" onclick="scrollToOffer()">QUIERO ACCEDER AHORA →</button>
+    </div>
+    <p class="hero-microcopy" style="text-align:center;">✔ Acceso inmediato &nbsp; ✔ Pago 100% seguro &nbsp; ✔ Garantía de 7 días</p>
+    <div class="hero-stats" style="justify-content:center;">
+      <div class="hero-stat"><b>1.000+</b><span>Sesiones completas</span></div>
+      <div class="hero-stat"><b>10+</b><span>Categorías de ejercicios</span></div>
+      <div class="hero-stat"><b>7 días</b><span>Garantía total</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- ===========================================================
+     SECCIÓN 2 — QUÉ INCLUYE
+=========================================================== -->
+<section id="incluye">
+  <div class="container">
+    <div class="eyebrow" style="justify-content:center;display:flex;">Qué recibirás</div>
+    <h2 class="section-title">Todo lo que Necesitas para <span class="accent">Entrenar sin Límites</span></h2>
+    <p class="section-sub">Un sistema completo de entrenamientos organizados por categoría, edad y objetivo, listo para aplicar desde el primer día.</p>
+
+    <div class="grid-cards">
+      <div class="feature-card">
+        <div class="feature-icon">📚</div>
+        <h3>Más de 1.000 entrenamientos</h3>
+        <p>Un banco masivo de sesiones completas, organizadas y listas para usar en cualquier categoría.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎯</div>
+        <h3>Ejercicios técnicos</h3>
+        <p>Control, pase, conducción, definición y todos los fundamentos individuales del jugador.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">♟️</div>
+        <h3>Ejercicios tácticos</h3>
+        <p>Movimientos colectivos, posicionamiento y esquemas para mejorar la lectura del juego.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💪</div>
+        <h3>Preparación física</h3>
+        <p>Rutinas de fuerza, velocidad y resistencia adaptadas al fútbol y a cada franja de edad.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔁</div>
+        <h3>Juegos reducidos</h3>
+        <p>Situaciones de juego real en espacios reducidos para acelerar el aprendizaje.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🤝</div>
+        <h3>Dinámicas grupales</h3>
+        <p>Actividades para fortalecer la cohesión, comunicación y espíritu de equipo.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔥</div>
+        <h3>Calentamientos</h3>
+        <p>Rutinas de activación específicas para preparar el cuerpo antes de cada sesión.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎉</div>
+        <h3>Actividades recreativas</h3>
+        <p>Juegos y dinámicas divertidas ideales para mantener la motivación en todas las edades.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🗂️</div>
+        <h3>Organización de sesiones</h3>
+        <p>Planificación estructurada para que armes tu semana de entrenamiento en minutos.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">👥</div>
+        <h3>Material para todas las edades</h3>
+        <p>Contenido adaptado a categorías infantiles, juveniles y adultas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===========================================================
+     SECCIÓN 3 — POR QUÉ MARCA LA DIFERENCIA
+=========================================================== -->
+<section class="section-alt">
+  <div class="container">
+    <div class="eyebrow" style="justify-content:center;display:flex;">Beneficios reales</div>
+    <h2 class="section-title">¿Por Qué Este Material <span class="accent">Marcará la Diferencia</span>?</h2>
+    <p class="section-sub">No es solo una colección de ejercicios: es el atajo que te ahorra tiempo y eleva el nivel de tus entrenamientos desde ya.</p>
+
+    <div class="benefits-list">
+      <div class="benefit-item">
+        <div class="benefit-check">✓</div>
+        <div><h4>Ahorra cientos de horas</h4><p>Deja de perder tiempo preparando entrenamientos desde cero cada semana.</p></div>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-check">✓</div>
+        <div><h4>Nunca repitas ejercicios</h4><p>Con más de 1.000 opciones, tus jugadores nunca entrenarán lo mismo dos veces.</p></div>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-check">✓</div>
+        <div><h4>Mejora el rendimiento del equipo</h4><p>Ejercicios diseñados para potenciar técnica, táctica y físico en conjunto.</p></div>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-check">✓</div>
+        <div><h4>Entrenamientos siempre dinámicos</h4><p>Mantén alta la motivación y la atención de tus jugadores en cada sesión.</p></div>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-check">✓</div>
+        <div><h4>Para principiantes y expertos</h4><p>Estructura clara que facilita la aplicación, sin importar tu experiencia.</p></div>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-check">✓</div>
+        <div><h4>Material organizado</h4><p>Todo clasificado por categoría, edad y objetivo para encontrar lo que necesitas al instante.</p></div>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-check">✓</div>
+        <div><h4>Fácil de aplicar</h4><p>Instrucciones claras, listas para llevar directamente al campo.</p></div>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-check">✓</div>
+        <div><h4>Inspiración ilimitada</h4><p>Un banco de ideas al que puedes volver cada temporada, sin quedarte nunca sin recursos.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===========================================================
+     SECCIÓN 4 — OFERTA (DOS PLANES)
+=========================================================== -->
+<section id="oferta">
+  <div class="container">
+    <div class="offer-top">
+      <div class="eyebrow" style="justify-content:center;display:flex;">Oferta por tiempo limitado</div>
+      <h2 class="section-title">Elige tu Plan de Acceso</h2>
+      <p class="section-sub" style="margin-bottom:10px;">Dos formas de empezar a entrenar mejor hoy mismo.</p>
+    </div>
+
+    <!-- GATILLO DE ESCASEZ
+    <div class="scarcity-bar">
+      <div class="scarcity-top">
+        <span>🔥 Cupos con precio especial</span>
+        <span id="scarcity-count">Quedan <b>14</b> cupos</span>
+      </div>
+      <div class="scarcity-track">
+        <div class="scarcity-fill" id="scarcity-fill"></div>
+      </div>
+      <p class="scarcity-note">Los precios suben cuando se agoten los cupos de hoy. No te quedes fuera.</p>
+    </div> -->
+
+    <div class="plans-grid">
+
+      <!-- PLAN BÁSICO -->
+      <div class="plan-card">
+        <div class="plan-head">
+          <span class="plan-name">Básico</span>
+          <p class="plan-desc">Para empezar a entrenar con variedad ya mismo.</p>
+        </div>
+        <div class="plan-price-row">
+          <span class="price-old">$19</span>
+          <span class="plan-price">$5</span>
+        </div>
+        <p class="price-note">Pago único · Acceso de por vida</p>
+        <ul class="offer-list">
+          <li><b>✔</b> 498 sesiones de entrenamiento</li>
+          <li><b>✔</b> Ejercicios técnicos y tácticos</li>
+          <li><b>✔</b> Calentamientos incluidos</li>
+          <li><b>✔</b> Acceso inmediato y descarga</li>
+        </ul>
+        <button class="btn btn-outline btn-block" onclick="openUpsell()">QUIERO EL BÁSICO →</button>
+      </div>
+
+      <!-- PLAN PLUS -->
+      <div class="plan-card plan-featured">
+        <span class="plan-badge">Más Popular</span>
+        <div class="plan-head">
+          <span class="plan-name">Plus</span>
+          <p class="plan-desc">El paquete completo para entrenar sin límites.</p>
+        </div>
+        <div class="plan-price-row">
+          <span class="price-old">$197</span>
+          <span class="plan-price">$15</span>
+        </div>
+        <p class="price-note">Pago único · Acceso de por vida</p>
+        <ul class="offer-list">
+          <li><b>✔</b> Más de 1.000 sesiones de entrenamiento</li>
+          <li><b>✔</b> Ejercicios técnicos, tácticos y físicos</li>
+          <li><b>✔</b> Juegos reducidos y dinámicas grupales</li>
+          <li><b>✔</b> Material para todas las edades y niveles</li>
+          <li><b>✔</b> Acceso inmediato y descarga ilimitada</li>
+        </ul>
+
+        <div class="bonus-grid bonus-grid-compact">
+          <div class="bonus-card">
+            <span class="bonus-tag">Bono 1</span>
+            <h4>100 Ejercicios de Calentamiento</h4>
+            <span class="bonus-value">Valor $27</span>
+          </div>
+          <div class="bonus-card">
+            <span class="bonus-tag">Bono 2</span>
+            <h4>Guía de Juegos Reducidos</h4>
+            <span class="bonus-value">Valor $19</span>
+          </div>
+          <div class="bonus-card">
+            <span class="bonus-tag">Bono 3</span>
+            <h4>Entrenamiento Moderno de Fútbol</h4>
+            <span class="bonus-value">Valor $23</span>
+          </div>
+        </div>
+
+        <p class="offer-total">Valor total: <b>$266</b> — Hoy solo <b style="color:var(--lime);">$15</b></p>
+
+        <button class="btn btn-primary btn-block" onclick="goToPlus()">QUIERO EL PLUS AHORA →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===========================================================
+     POPUP DE UPSELL (al elegir el plan Básico)
+=========================================================== -->
+<div class="upsell-overlay" id="upsell-overlay">
+  <div class="upsell-modal">
+    <button class="upsell-close" onclick="closeUpsell()">×</button>
+    <div class="upsell-badge">Oferta única · No se repetirá</div>
+    <h3>Espera... ¡Antes de continuar! 🚀</h3>
+    <p class="upsell-text">Por tiempo limitado, lleva el <b>Plan Plus</b> con más de <b>1.000 sesiones</b> (en vez de solo 498) pagando apenas un pequeño extra.</p>
+
+    <div class="upsell-price-box">
+      <span class="upsell-old">Precio normal: $15</span>
+      <span class="upsell-new">Hoy solo $7,50</span>
+    </div>
+
+    <ul class="offer-list">
+      <li><b>✔</b> Más del doble de sesiones (1.000+ vs 498)</li>
+      <li><b>✔</b> Los 3 bonos exclusivos incluidos</li>
+    </ul>
+
+    <button class="btn btn-primary btn-block" onclick="goToUpsell()">SÍ, QUIERO EL PLUS POR $7,50 →</button>
+    <button class="upsell-decline" onclick="goToBasico()">No, gracias, prefiero el Básico por $5</button>
+  </div>
+</div>
+
+<!-- ===========================================================
+     SECCIÓN 5 — URGENCIA
+=========================================================== -->
+<section class="urgency">
+  <div class="container">
+    <div class="eyebrow" style="justify-content:center;display:flex;">Actúa ahora</div>
+    <h2 class="section-title">Esta Oferta Puede Terminar en Cualquier Momento</h2>
+    <p class="section-sub">Los cupos con precio especial son limitados y se agotan sin previo aviso. Una vez que se acaben, el precio volverá a su valor normal.</p>
+
+    <button class="btn btn-primary" onclick="scrollToOffer()">APROVECHAR LA OFERTA</button>
+  </div>
+</section>
+
+<!-- ===========================================================
+     SECCIÓN 6 — CARRUSEL DE CONTENIDO
+=========================================================== -->
+<section>
+  <div class="container">
+    <div class="eyebrow" style="justify-content:center;display:flex;">Vista previa</div>
+    <h2 class="section-title">Mira Parte del Contenido</h2>
+    <p class="section-sub">Una muestra de la calidad y variedad de material que encontrarás dentro del pack.</p>
+
+    <div class="carousel-wrap">
+      <button class="carousel-btn prev" onclick="moveSlide(-1)">‹</button>
+      <div class="carousel-track-outer">
+        <div class="carousel-track" id="carousel-track">
+          <div class="carousel-slide">
+            <img src="carousel-1.png" alt="Juegos Reducidos">
+            <div class="carousel-caption">Juegos Reducidos</div>
+          </div>
+          <div class="carousel-slide">
+            <img src="carousel-2.png" alt="Coordinación y Agilidad">
+            <div class="carousel-caption">Coordinación y Agilidad</div>
+          </div>
+          <div class="carousel-slide">
+            <img src="carousel-3.png" alt="Ejercicios Técnicos">
+            <div class="carousel-caption">Ejercicios Técnicos</div>
+          </div>
+          <div class="carousel-slide">
+            <img src="carousel-4.png" alt="Ejercicios Tácticos">
+            <div class="carousel-caption">Ejercicios Tácticos</div>
+          </div>
+          <div class="carousel-slide">
+            <img src="carousel-5.png" alt="Partido Condicionado">
+            <div class="carousel-caption">Partido Condicionado</div>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-btn next" onclick="moveSlide(1)">›</button>
+      <div class="carousel-dots" id="carousel-dots"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===========================================================
+     SECCIÓN 7 — TESTIMONIOS
+=========================================================== -->
+<section class="section-alt">
+  <div class="container">
+    <div class="eyebrow" style="justify-content:center;display:flex;">Testimonios</div>
+    <h2 class="section-title">Entrenadores que Ya lo Están Aplicando</h2>
+
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="testi-head">
+          <img class="testi-avatar" src="https://i.pravatar.cc/150?img=52" alt="Carlos Martínez">
+          <div>
+            <div class="testi-name">Carlos Martínez</div>
+            <div class="testi-role">Entrenador de fútbol base</div>
+          </div>
+        </div>
+        <div class="stars">★★★★★</div>
+        <p>"Desde que uso este material, planificar la semana me toma la mitad del tiempo. Los ejercicios están muy bien explicados y mis jugadores notaron la diferencia rápido."</p>
+      </div>
+      <div class="testi-card">
+        <div class="testi-head">
+          <img class="testi-avatar" src="https://i.pravatar.cc/150?img=47" alt="Laura Rodríguez">
+          <div>
+            <div class="testi-name">Laura Rodríguez</div>
+            <div class="testi-role">Profesora de educación física</div>
+          </div>
+        </div>
+        <div class="stars">★★★★★</div>
+        <p>"Lo que más valoro es la variedad. Nunca me quedo sin ideas y puedo adaptar cada sesión a la edad de mis alumnos sin complicarme."</p>
+      </div>
+      <div class="testi-card">
+        <div class="testi-head">
+          <img class="testi-avatar" src="https://i.pravatar.cc/150?img=33" alt="Javier González">
+          <div>
+            <div class="testi-name">Javier González</div>
+            <div class="testi-role">Preparador físico</div>
+          </div>
+        </div>
+        <div class="stars">★★★★★</div>
+        <p>"Un material muy completo y bien organizado. Lo recomiendo a cualquier entrenador que quiera subir el nivel de sus entrenamientos sin invertir horas planificando."</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===========================================================
+     SECCIÓN 8 — GARANTÍA
+=========================================================== -->
+<section>
+  <div class="container">
+    <div class="guarantee">
+      <div class="guarantee-seal">
+        <span class="num">7</span>
+        <span class="txt">DÍAS DE<br>GARANTÍA</span>
+      </div>
+      <div>
+        <h3>Compra 100% Libre de Riesgo</h3>
+        <p>Si por cualquier motivo el material no cumple tus expectativas, puedes solicitar el reembolso dentro de los primeros 7 días. Sin preguntas, sin complicaciones: tu satisfacción es lo primero.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===========================================================
+     SECCIÓN 9 — FAQ
+=========================================================== -->
+<section class="section-alt">
+  <div class="container">
+    <div class="eyebrow" style="justify-content:center;display:flex;">Preguntas frecuentes</div>
+    <h2 class="section-title">Resolvemos tus Dudas</h2>
+
+    <div class="faq-wrap" id="faq-wrap">
+      <div class="faq-item">
+        <button class="faq-question">¿El acceso es inmediato? <span class="icon">+</span></button>
+        <div class="faq-answer"><p>Sí. En cuanto se confirma tu pago, recibirás acceso completo al material al instante.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">¿Puedo descargar el material? <span class="icon">+</span></button>
+        <div class="faq-answer"><p>Sí, todo el contenido está disponible para descargar y usar sin conexión cuando quieras.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">¿Sirve para entrenadores principiantes? <span class="icon">+</span></button>
+        <div class="faq-answer"><p>Totalmente. El material está organizado paso a paso, ideal tanto para quienes recién comienzan como para entrenadores experimentados.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">¿Hay entrenamientos para niños? <span class="icon">+</span></button>
+        <div class="faq-answer"><p>Sí, encontrarás sesiones específicas adaptadas a categorías infantiles, juveniles y adultas.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">¿Recibiré futuras actualizaciones? <span class="icon">+</span></button>
+        <div class="faq-answer"><p>Sí, el acceso incluye las actualizaciones futuras del material sin costo adicional.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===========================================================
+     CTA FINAL
+=========================================================== -->
+<section style="text-align:center;">
+  <div class="container">
+    <h2 class="section-title">No Dejes tu Próximo Entrenamiento al Azar</h2>
+    <p class="section-sub">Accede hoy a más de 1.000 sesiones listas para aplicar y transforma la forma en que entrenas.</p>
+    <button class="btn btn-primary" onclick="scrollToOffer()">QUIERO ACCEDER AHORA →</button>
+  </div>
+</section>
+
+<!-- ===========================================================
+     FOOTER
+=========================================================== -->
+<footer>
+  <div class="container">
+    <div class="footer-brand">⚽ FÚTBOL PRO SESSIONS</div>
+    <p>© 2026 Sesiones de Entrenamiento de Fútbol. Todos los derechos reservados.</p>
+  </div>
+</footer>
+
+<!-- STICKY CTA -->
+<div class="sticky-cta" id="sticky-cta">
+  <div class="info"><b>$5</b> Oferta especial por tiempo limitado</div>
+  <button class="btn btn-primary btn-sm" onclick="scrollToOffer()">QUIERO ACCEDER AHORA</button>
+</div>
+
+<script>
+  /* ============ LINKS DE PAGO (HOTMART) ============ */
+  const LINK_BASICO = 'https://pay.hotmart.com/T106613145L?off=8jsg22j7';   // Oferta $5
+  const LINK_PLUS   = 'https://pay.hotmart.com/H106611705J?off=2f6tzug6';   // Oferta $15
+  const LINK_UPSELL = 'https://pay.hotmart.com/H106611705J?off=c74k0qak';   // Oferta $7,50
+
+  function goToBasico(){
+    window.open(LINK_BASICO, '_blank');
+  }
+  function goToPlus(){
+    window.open(LINK_PLUS, '_blank');
+  }
+  function goToUpsell(){
+    window.open(LINK_UPSELL, '_blank');
+  }
+
+  /* ============ SCROLL SUAVE AL BOTÓN CTA ============ */
+  function scrollToOffer(){
+    document.getElementById('oferta').scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  /* ============ POPUP DE UPSELL (Básico → Plus con descuento) ============ */
+  const upsellOverlay = document.getElementById('upsell-overlay');
+  function openUpsell(){
+    upsellOverlay.classList.add('show');
+  }
+  function closeUpsell(){
+    upsellOverlay.classList.remove('show');
+  }
+  upsellOverlay.addEventListener('click', (e) => {
+    if(e.target === upsellOverlay) closeUpsell();
+  });
+
+  /* ============ GATILLO DE ESCASEZ: CUPOS DISMINUYENDO (con persistencia en cookie) ============ */
+  const scarcityCount = document.getElementById('scarcity-count');
+  const scarcityFill = document.getElementById('scarcity-fill');
+  const cuposIniciales = 30;
+  const cuposMinimos = 3;
+  const cuposValorInicial = 14;
+  const COOKIE_NAME = 'cupos_restantes';
+  const COOKIE_DIAS = 7;
+
+  /* Lee el valor de una cookie por nombre */
+  function leerCookie(nombre){
+    const match = document.cookie.match(new RegExp('(^| )' + nombre + '=([^;]+)'));
+    return match ? match[2] : null;
+  }
+
+  /* Guarda un valor en cookie con fecha de expiración */
+  function guardarCookie(nombre, valor, dias){
+    const fecha = new Date();
+    fecha.setTime(fecha.getTime() + (dias * 24 * 60 * 60 * 1000));
+    document.cookie = `${nombre}=${valor};expires=${fecha.toUTCString()};path=/`;
+  }
+
+  /* Recupera el valor guardado, o usa el inicial si es la primera visita */
+  const cupoGuardado = leerCookie(COOKIE_NAME);
+  let cuposRestantes = cupoGuardado !== null ? parseInt(cupoGuardado, 10) : cuposValorInicial;
+  if(isNaN(cuposRestantes)) cuposRestantes = cuposValorInicial;
+
+  function actualizarEscasez(){
+    scarcityCount.innerHTML = `Quedan <b>${cuposRestantes}</b> cupos`;
+    const porcentaje = Math.max((cuposRestantes / cuposIniciales) * 100, 8);
+    scarcityFill.style.width = porcentaje + '%';
+    guardarCookie(COOKIE_NAME, cuposRestantes, COOKIE_DIAS);
+  }
+  actualizarEscasez();
+
+  setInterval(() => {
+    if(cuposRestantes > cuposMinimos){
+      cuposRestantes--;
+      actualizarEscasez();
+    }
+  }, 25000);
+
+  /* ============ STICKY CTA VISIBILITY ============ */
+  const stickyCta = document.getElementById('sticky-cta');
+  const heroEl = document.querySelector('.hero');
+  window.addEventListener('scroll', () => {
+    const heroBottom = heroEl.getBoundingClientRect().bottom;
+    if (heroBottom < 0) {
+      stickyCta.classList.add('show');
+    } else {
+      stickyCta.classList.remove('show');
+    }
+  });
+
+  /* ============ CARRUSEL ============ */
+  const track = document.getElementById('carousel-track');
+  const slides = document.querySelectorAll('.carousel-slide');
+  const dotsWrap = document.getElementById('carousel-dots');
+  let currentSlide = 0;
+
+  slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    if(i === 0) dot.classList.add('active');
+    dot.addEventListener('click', () => goToSlide(i));
+    dotsWrap.appendChild(dot);
+  });
+  const dots = dotsWrap.querySelectorAll('button');
+
+  function renderSlide(){
+    track.style.transform = `translateX(-${currentSlide * 100}%)`;
+    dots.forEach((d,i) => d.classList.toggle('active', i === currentSlide));
+  }
+  function moveSlide(dir){
+    currentSlide = (currentSlide + dir + slides.length) % slides.length;
+    renderSlide();
+  }
+  function goToSlide(i){
+    currentSlide = i;
+    renderSlide();
+  }
+  // Auto-play carousel
+  setInterval(() => moveSlide(1), 5000);
+
+  /* ============ FAQ ACCORDION ============ */
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const question = item.querySelector('.faq-question');
+    const answer = item.querySelector('.faq-answer');
+    question.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      // Close all
+      document.querySelectorAll('.faq-item').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.faq-answer').style.maxHeight = null;
+      });
+      // Open clicked if it wasn't already open
+      if(!isOpen){
+        item.classList.add('open');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
