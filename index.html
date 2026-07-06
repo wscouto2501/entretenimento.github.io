@@ -436,53 +436,6 @@
   .offer-total b{ color:var(--white); }
 
   /* ===========================================================
-     GATILLO DE ESCASEZ
-  =========================================================== */
-  .scarcity-bar{
-    max-width:640px;
-    margin:0 auto 50px;
-    background:var(--black-card);
-    border:1px solid rgba(255,82,82,.35);
-    border-radius:16px;
-    padding:22px 26px;
-  }
-  .scarcity-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    font-size:14px;
-    font-weight:700;
-    margin-bottom:12px;
-    flex-wrap:wrap;
-    gap:8px;
-  }
-  .scarcity-top b{ color:#ff5252; }
-  .scarcity-track{
-    width:100%;
-    height:8px;
-    background:var(--border);
-    border-radius:100px;
-    overflow:hidden;
-  }
-  .scarcity-fill{
-    height:100%;
-    width:82%;
-    background:linear-gradient(90deg, var(--lime), #ff5252);
-    border-radius:100px;
-    animation:pulseWidth 3s ease-in-out infinite;
-  }
-  @keyframes pulseWidth{
-    0%,100%{ opacity:1; }
-    50%{ opacity:.75; }
-  }
-  .scarcity-note{
-    font-size:12.5px;
-    color:var(--gray-dim);
-    margin-top:10px;
-    text-align:center;
-  }
-
-  /* ===========================================================
      DOS PLANES
   =========================================================== */
   .plans-grid{
@@ -1097,18 +1050,6 @@
       <p class="section-sub" style="margin-bottom:10px;">Dos formas de empezar a entrenar mejor hoy mismo.</p>
     </div>
 
-    <!-- GATILLO DE ESCASEZ
-    <div class="scarcity-bar">
-      <div class="scarcity-top">
-        <span>🔥 Cupos con precio especial</span>
-        <span id="scarcity-count">Quedan <b>14</b> cupos</span>
-      </div>
-      <div class="scarcity-track">
-        <div class="scarcity-fill" id="scarcity-fill"></div>
-      </div>
-      <p class="scarcity-note">Los precios suben cuando se agoten los cupos de hoy. No te quedes fuera.</p>
-    </div> -->
-
     <div class="plans-grid">
 
       <!-- PLAN BÁSICO -->
@@ -1412,48 +1353,6 @@
   upsellOverlay.addEventListener('click', (e) => {
     if(e.target === upsellOverlay) closeUpsell();
   });
-
-  /* ============ GATILLO DE ESCASEZ: CUPOS DISMINUYENDO (con persistencia en cookie) ============ */
-  const scarcityCount = document.getElementById('scarcity-count');
-  const scarcityFill = document.getElementById('scarcity-fill');
-  const cuposIniciales = 30;
-  const cuposMinimos = 3;
-  const cuposValorInicial = 14;
-  const COOKIE_NAME = 'cupos_restantes';
-  const COOKIE_DIAS = 7;
-
-  /* Lee el valor de una cookie por nombre */
-  function leerCookie(nombre){
-    const match = document.cookie.match(new RegExp('(^| )' + nombre + '=([^;]+)'));
-    return match ? match[2] : null;
-  }
-
-  /* Guarda un valor en cookie con fecha de expiración */
-  function guardarCookie(nombre, valor, dias){
-    const fecha = new Date();
-    fecha.setTime(fecha.getTime() + (dias * 24 * 60 * 60 * 1000));
-    document.cookie = `${nombre}=${valor};expires=${fecha.toUTCString()};path=/`;
-  }
-
-  /* Recupera el valor guardado, o usa el inicial si es la primera visita */
-  const cupoGuardado = leerCookie(COOKIE_NAME);
-  let cuposRestantes = cupoGuardado !== null ? parseInt(cupoGuardado, 10) : cuposValorInicial;
-  if(isNaN(cuposRestantes)) cuposRestantes = cuposValorInicial;
-
-  function actualizarEscasez(){
-    scarcityCount.innerHTML = `Quedan <b>${cuposRestantes}</b> cupos`;
-    const porcentaje = Math.max((cuposRestantes / cuposIniciales) * 100, 8);
-    scarcityFill.style.width = porcentaje + '%';
-    guardarCookie(COOKIE_NAME, cuposRestantes, COOKIE_DIAS);
-  }
-  actualizarEscasez();
-
-  setInterval(() => {
-    if(cuposRestantes > cuposMinimos){
-      cuposRestantes--;
-      actualizarEscasez();
-    }
-  }, 25000);
 
   /* ============ STICKY CTA VISIBILITY ============ */
   const stickyCta = document.getElementById('sticky-cta');
